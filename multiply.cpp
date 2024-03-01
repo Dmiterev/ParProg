@@ -81,13 +81,17 @@ int main()
         string filename2 = ss2.str();
         vector<vector<int>> mat1 = read_matrix(filename1);
         vector<vector<int>> mat2 = read_matrix(filename2);
+        vector<vector<int>> res;
         auto start = std::chrono::high_resolution_clock::now();
-        vector<vector<int>> res = multiply_matrix(mat1, mat2, size);
+        for (int i = 0; i < 6; ++i)
+        {
+            res = multiply_matrix(mat1, mat2, size);
+        }
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
         ss3 << "res." << size << ".txt";
         write_matrix(res, ss3.str());
-        output_file << duration.count() << endl;
+        output_file <<size<< " - "<< duration.count() / 6 << endl;
     }
     output_file.close();
 }
